@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Puppy Crawl//DTD Check Configuration 1.3//EN"
+		"http://www.puppycrawl.com/dtds/configuration_1_3.dtd">
+
+
+<module name="Checker">
+	<property name="severity" value="warning"/>
+	<module name="TreeWalker">
+		<module name="FileContentsHolder"/>
+		<module name="JavadocType">
+			<property name="severity" value="error"/>
+			<!--<property name="authorFormat" value="[A-Za-z -]+ &lt;[A-Za-z0-9\._-]+@[a-z0-9\._-]+\.[a-z]+&gt;"/>-->
+		</module>
+		<module name="LineLength">
+			<property name="ignorePattern" value="^import .*$"/>
+			<property name="max" value="140"/>
+		</module>
+		<module name="ConstantName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="LocalFinalVariableName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="LocalVariableName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="MemberName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="MethodName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="PackageName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="ParameterName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="StaticVariableName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="TypeName">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="AvoidStarImport"/>
+		<!--<module name="IllegalImport"/>-->
+		<module name="RedundantImport"/>
+		<module name="UnusedImports"/>
+		<module name="MethodLength">
+			<property name="max" value="100"/>
+		</module>
+		<module name="ParameterNumber">
+			<property name="severity" value="info"/>
+			<property name="max" value="4"/>
+		</module>
+		<module name="EmptyForIteratorPad"/>
+		<module name="MethodParamPad"/>
+		<module name="NoWhitespaceAfter">
+			<property name="tokens" value="BNOT,DEC,DOT,INC,LNOT,UNARY_MINUS,UNARY_PLUS"/>
+		</module>
+		<module name="NoWhitespaceBefore"/>
+		<module name="OperatorWrap"/>
+		<module name="ParenPad"/>
+		<module name="TypecastParenPad"/>
+		<module name="WhitespaceAfter"/>
+		<module name="WhitespaceAround"/>
+		<module name="ModifierOrder"/>
+		<module name="RedundantModifier"/>
+		<module name="AvoidNestedBlocks"/>
+		<module name="EmptyBlock"/>
+		<module name="LeftCurly"/>
+		<module name="NeedBraces"/>
+		<module name="RightCurly"/>
+		<module name="AvoidInlineConditionals">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="EmptyStatement">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="EqualsHashCode">
+			<property name="severity" value="warning"/>
+		</module>
+		<module name="HiddenField">
+			<property name="severity" value="ignore"/>
+			<property name="ignoreConstructorParameter" value="true"/>
+			<property name="ignoreSetter" value="true"/>
+		</module>
+		<module name="IllegalInstantiation">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="InnerAssignment">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="MissingSwitchDefault">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="RedundantThrows">
+			<property name="severity" value="warning"/>
+			<property name="suppressLoadErrors" value="true"/>
+		</module>
+		<module name="SimplifyBooleanExpression">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="SimplifyBooleanReturn">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="FinalClass">
+			<property name="severity" value="info"/>
+		</module>
+		<module name="HideUtilityClassConstructor"/>
+		<module name="InterfaceIsType"/>
+		<module name="VisibilityModifier"/>
+		<module name="ArrayTypeStyle"/>
+		<module name="TodoComment">
+			<property name="severity" value="info"/>
+			<property name="format" value="TODO|@todo"/>
+		</module>
+		<module name="UpperEll"/>
+		<module name="AvoidStaticImport"/>
+		<module name="AnonInnerLength">
+			<property name="max" value="0"/>
+		</module>
+		<module name="OuterTypeNumber"/>
+		<module name="ExecutableStatementCount">
+			<property name="max" value="50"/>
+			<property name="tokens" value="INSTANCE_INIT,STATIC_INIT,METHOD_DEF,CTOR_DEF"/>
+		</module>
+		<module name="CovariantEquals"/>
+		<module name="DefaultComesLast">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="DeclarationOrder">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="EqualsAvoidNull">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="ExplicitInitialization">
+			<property name="severity" value="ignore"/>
+			<metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="info"/>
+		</module>
+		<module name="FallThrough"/>
+		<module name="IllegalCatch">
+			<property name="severity" value="info"/>
+			<metadata name="net.sf.eclipsecs.core.lastEnabledSeverity" value="info"/>
+		</module>
+		<!--<module name="IllegalThrows">-->
+		<!--<property name="severity" value="error"/>-->
+		<!--</module>-->
+		<module name="IllegalType">
+			<property name="severity" value="warning"/>
+			<property name="tokens" value="METHOD_DEF,PARAMETER_DEF,VARIABLE_DEF"/>
+		</module>
+		<module name="JUnitTestCase"/>
+		<module name="ModifiedControlVariable">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="MultipleStringLiterals">
+			<property name="severity" value="warning"/>
+			<property name="allowedDuplicates" value="5"/>
+			<property name="ignoreOccurrenceContext"
+					  value="ANNOTATION,ANNOTATION_MEMBER_VALUE_PAIR,ANNOTATION_ARRAY_INIT"/>
+		</module>
+		<module name="MultipleVariableDeclarations">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="NoClone"/>
+		<module name="NoFinalizer"/>
+		<module name="PackageDeclaration"/>
+		<module name="ReturnCount">
+			<property name="severity" value="warning"/>
+		</module>
+		<module name="StringLiteralEquality">
+			<property name="severity" value="error"/>
+		</module>
+		<module name="ArrayTrailingComma"/>
+		<module name="ThrowsCount">
+			<property name="max" value="2"/>
+		</module>
+		<module name="BooleanExpressionComplexity">
+			<property name="max" value="4"/>
+		</module>
+		<module name="CyclomaticComplexity">
+			<property name="max" value="7"/>
+		</module>
+		<!--<module name="Indentation"/>-->
+		<module name="TrailingComment">
+			<property name="legalComment" value="\s*NOPMD.*"/>
+		</module>
+		<module name="JavadocMethod">
+			<property name="severity" value="info"/>
+			<property name="allowMissingPropertyJavadoc" value="true"/>
+			<property name="suppressLoadErrors" value="true"/>
+			<property name="allowUndeclaredRTE" value="true"/>
+		</module>
+		<module name="JavadocVariable">
+			<property name="severity" value="info"/>
+			<property name="excludeScope" value="public"/>
+		</module>
+		<module name="MissingDeprecated"/>
+		<module name="AnnotationUseStyle"/>
+		<module name="MissingOverride"/>
+		<module name="SuppressWarnings"/>
+		<module name="PackageAnnotation"/>
+		<module name="AbstractClassName">
+			<property name="severity" value="error"/>
+			<property name="format" value="^Abstract.*$"/>
+		</module>
+		<module name="MethodTypeParameterName"/>
+		<module name="MagicNumber">
+			<property name="severity" value="info"/>
+			<property name="ignoreHashCodeMethod" value="true"/>
+			<property name="ignoreAnnotation" value="true"/>
+		</module>
+		<module name="ParameterAssignment"/>
+		<module name="OneStatementPerLine"/>
+	</module>
+	<module name="NewlineAtEndOfFile"/>
+	<module name="Translation">
+		<property name="severity" value="warning"/>
+	</module>
+	<module name="FileLength"/>
+	<module name="FileTabCharacter">
+		<property name="eachLine" value="true"/>
+	</module>
+	<module name="SuppressionCommentFilter"/>
+	<module name="JavadocPackage"/>
+</module>
