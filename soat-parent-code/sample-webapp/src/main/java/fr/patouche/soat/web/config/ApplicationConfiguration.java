@@ -5,10 +5,12 @@ import javax.sql.DataSource;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hibernate.cfg.AvailableSettings;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -27,27 +29,26 @@ import org.springframework.transaction.PlatformTransactionManager;
 @ComponentScan("fr.patouche.soat.service")
 public class ApplicationConfiguration {
 
-    private Map<String, ?> additionalProperties() {
+    private Map<String, ?> additionalProperties(final Environment env) {
         final Map<String, Object> properties = new HashMap<>();
-        properties.put("hibernate.hbm2ddl.auto", "create-drop");
-        properties.put("hibernate.dialect", "org.hibernate.dialect.MySQL5Dialect");
-
-        // Auditing : http://docs.jboss.org/hibernate/orm/4.1/devguide/en-US/html/ch15.html#d5e3910
-        // properties.put(EnversSettings.AUDIT_TABLE_SUFFIX, "_REVISION");
-        // properties.put(EnversSettings.AUDIT_STRATEGY, DefaultAuditStrategy.class.getName());
-        // properties.put(EnversSettings.REVISION_FIELD_NAME, "REV_NUMBER");
-        // properties.put(EnversSettings.REVISION_TYPE_FIELD_NAME, "REV_ENTITY");
-        // properties.put(EnversSettings.REVISION_LISTENER, CustomRevisionListener.class.getName());
-
+        properties.put(AvailableSettings.HBM2DDL_AUTO, "create-drop");
+        properties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.PostgreSQL9Dialect");
         return properties;
     }
 
+    /**
+     * Create the factory to initialize the entity manager.
+     *
+     * @param dataSource the datasource to use
+     * @param env        the current spring env
+     * @return the entity manager factory
+     */
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory(final DataSource dataSource) {
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory(final DataSource dataSource, final Environment env) {
 
         final HibernateJpaVendorAdapter vendorAdapter = new HibernateJpaVendorAdapter();
         vendorAdapter.setGenerateDdl(false);
-        vendorAdapter.setDatabase(Database.MYSQL);
+        vendorAdapter.setDatabase(Database.POSTGRESQL);
         vendorAdapter.setShowSql(false);
 
         LocalContainerEntityManagerFactoryBean factory = new LocalContainerEntityManagerFactoryBean();
@@ -55,7 +56,7 @@ public class ApplicationConfiguration {
         factory.setPackagesToScan("fr.patouche.soat.entity");
         factory.setDataSource(dataSource);
         factory.afterPropertiesSet();
-        factory.setJpaPropertyMap(additionalProperties());
+        factory.setJpaPropertyMap(additionalProperties(env));
 
         return factory;
     }

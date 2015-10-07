@@ -3,9 +3,11 @@ package fr.patouche.soat.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -15,7 +17,7 @@ import java.io.Serializable;
  * @author patouche - 06/10/15
  */
 @Entity
-@Table(name = "COMMENT")
+@Table(name = "comment")
 public class Comment implements Serializable {
 
     /** Serial version UID. */
@@ -23,21 +25,22 @@ public class Comment implements Serializable {
 
     /** Technical id. */
     @Id
-    @GeneratedValue
-    @Column(name = "ID")
+    @Column(name = "id")
+    @SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "comment_id_seq", name = "comment_id_seq")
+    @GeneratedValue(generator = "comment_id_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     /** The comment content. */
-    @Column(name = "CONTENT", nullable = false, length = 4000)
+    @Column(name = "content", nullable = false, length = 4000)
     private String content;
 
     /** The author name. */
-    @Column(name = "USER_ID", nullable = false)
+    @Column(name = "user_id", nullable = false)
     private String author;
 
     /** The post which the comment is related. */
     @ManyToOne(optional = false)
-    @JoinColumn(name = "POST_ID")
+    @JoinColumn(name = "post_id")
     private Post post;
 
     protected Comment() {

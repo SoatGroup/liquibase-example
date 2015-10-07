@@ -6,8 +6,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Profile;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
+import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 
 /**
  * Datasource configuration.
@@ -21,14 +23,35 @@ public class DataSourceConfiguration {
     private static final Logger LOGGER = LoggerFactory.getLogger(DataSourceConfiguration.class);
 
     @Configuration
+    @Profile("!db-jndi")
     public static class H2DataSourceConfiguration {
 
+        /**
+         * Create a data source base on H2 database.
+         *
+         * @return the h2 dataSource
+         */
         @Bean
         public DataSource dataSource() {
             LOGGER.info("Create a H2 DataSource");
             return new EmbeddedDatabaseBuilder()
                     .setType(EmbeddedDatabaseType.H2)
                     .build();
+        }
+    }
+
+    @Configuration
+    @Profile("db-jndi")
+    public static class JndiDataSourceConfiguration {
+
+        /**
+         * Create a data source base on H2 database.
+         *
+         * @return the h2 dataSource
+         */
+        @Bean
+        public DataSource dataSource() {
+            return new JndiDataSourceLookup().getDataSource("jdbc/dev");
         }
     }
 

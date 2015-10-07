@@ -3,7 +3,9 @@ package fr.patouche.soat.entity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import java.io.Serializable;
 
@@ -15,7 +17,7 @@ import org.hibernate.annotations.NaturalId;
  * @author patouche - 06/10/15
  */
 @Entity
-@Table(name = "POST")
+@Table(name = "post")
 public class Post implements Serializable {
 
     /** Serial version UID. */
@@ -23,22 +25,23 @@ public class Post implements Serializable {
 
     /** Technical identifier. */
     @Id
-    @GeneratedValue
-    @Column(name = "ID")
+    @Column(name = "id")
+    @SequenceGenerator(allocationSize = 1, initialValue = 1, sequenceName = "post_id_seq", name = "post_id_seq")
+    @GeneratedValue(generator = "post_id_seq", strategy = GenerationType.SEQUENCE)
     private Long id;
 
     /** The post author. */
-    @Column(name = "AUTHOR", nullable = false)
+    @Column(name = "author", nullable = false)
     private String author;
 
     /** The post content. */
     @NaturalId
-    @Column(name = "TITLE", nullable = false)
+    @Column(name = "title", nullable = false)
     private String title;
 
     /** The post content. */
     @NaturalId
-    @Column(name = "CONTENT", nullable = false, length = 4000)
+    @Column(name = "content", nullable = false, length = 4000)
     private String content;
 
     protected Post() {
