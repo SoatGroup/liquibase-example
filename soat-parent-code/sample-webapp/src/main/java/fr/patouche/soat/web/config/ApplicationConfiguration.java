@@ -1,4 +1,4 @@
-package fr.patouche.soat.web;
+package fr.patouche.soat.web.config;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
@@ -8,9 +8,8 @@ import java.util.Map;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
-import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.Database;
@@ -23,8 +22,9 @@ import org.springframework.transaction.PlatformTransactionManager;
  * @author : patouche - 06/10/15.
  */
 @Configuration
+@Import(DataSourceConfiguration.class)
 @EnableJpaRepositories(basePackages = "fr.patouche.soat.repository")
-@ComponentScan({ "fr.patouche.soat.service" })
+@ComponentScan("fr.patouche.soat.service")
 public class ApplicationConfiguration {
 
     private Map<String, ?> additionalProperties() {
@@ -40,13 +40,6 @@ public class ApplicationConfiguration {
         // properties.put(EnversSettings.REVISION_LISTENER, CustomRevisionListener.class.getName());
 
         return properties;
-    }
-
-    @Bean
-    public DataSource dataSource() {
-        return new EmbeddedDatabaseBuilder()
-                .setType(EmbeddedDatabaseType.H2)
-                .build();
     }
 
     @Bean

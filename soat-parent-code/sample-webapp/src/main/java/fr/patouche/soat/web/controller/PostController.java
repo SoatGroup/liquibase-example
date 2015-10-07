@@ -31,12 +31,25 @@ public class PostController {
     @Inject
     private CommentService commentService;
 
+    /**
+     * Retrieve all posts.
+     *
+     * @param model the model to fill
+     * @return the post all view
+     */
     @RequestMapping(value = "/", method = RequestMethod.GET)
     public String all(Model model) {
         model.addAttribute("posts", this.postService.getAll());
         return "post/all";
     }
 
+    /**
+     * Read a post.
+     *
+     * @param id    the id of the post
+     * @param model the model to fill
+     * @return the post read view
+     */
     @RequestMapping(value = "/post/{id:[0-9]+}", method = RequestMethod.GET)
     public String read(@PathVariable("id") Long id, Model model) {
         final Post post = this.postService.read(id)
@@ -46,11 +59,24 @@ public class PostController {
         return "post/read";
     }
 
+    /**
+     * Create a post.
+     *
+     * @return the post create view
+     */
     @RequestMapping(value = "/post/create", method = RequestMethod.GET)
     public String create() {
         return "post/create";
     }
 
+    /**
+     * Create a post and return it.
+     *
+     * @param author  the name of the author
+     * @param title   the title of the post
+     * @param content the content of the post
+     * @return the post read view
+     */
     @RequestMapping(value = "/post/create", method = RequestMethod.POST)
     public String create(@RequestParam("author") String author, @RequestParam("title") String title,
             @RequestParam("content") String content) {

@@ -1,4 +1,4 @@
-package fr.patouche.soat.web;
+package fr.patouche.soat.web.config;
 
 import java.nio.charset.StandardCharsets;
 import java.util.List;

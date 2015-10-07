@@ -20,13 +20,22 @@ import fr.patouche.soat.service.CommentService;
 @RequestMapping("/post/{postId:[0-9]+}")
 public class CommentController {
 
+    /** The comment service. */
     @Inject
     private CommentService commentService;
 
+    /**
+     * Add a comment.
+     *
+     * @param postId  the post id
+     * @param content the content of the comment
+     * @param author  the name of the author
+     * @return the post view
+     */
     @RequestMapping(value = "/comment", method = RequestMethod.POST)
-    public String create(@PathVariable("postId") Long postId, @RequestParam("content") String content,
+    public String add(@PathVariable("postId") Long postId, @RequestParam("content") String content,
             @RequestParam("author") String author) {
-        final Post post = this.commentService.addComment(postId, content, author);
+        Post post = this.commentService.addComment(postId, content, author);
         return "redirect:/post/" + post.getId();
     }
 
