@@ -1,0 +1,39 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <title>All Posts</title>
+</head>
+<body>
+<h1>All Post</h1>
+
+<div layout:fragment="content">
+
+    <nav class="action-bar">
+        <a th:href="@{/post/create}" class="btn btn-default" th:utext="#{post.all.create}">Create a new post</a>
+    </nav>
+
+    <h1 th:text="#{post.all.title}">All Posts</h1>
+
+    <div th:each="p : ${posts}" class="post-item">
+        <h2 class="home-title">
+            <th:block th:text="${p.title}">Post title</th:block>
+            <em th:text="#{post.all.author(${p.author})}">Post author</em>
+        </h2>
+
+        <div>
+            <p th:text="${#strings.abbreviate(p.content, 1000)}">Post content</p>
+        </div>
+
+        <div class="text-right">
+            <a th:href="@{/post/{postId}(postId=${p.id})}" th:utext="#{post.all.view}" class="btn btn-xs btn-default">View more</a>
+        </div>
+    </div>
+
+    <div th:if="${#lists.isEmpty(posts)}" class="text-center">
+        <em th:text="#{post.all.empty}">No post</em>
+    </div>
+
+</div>
+
+</body>
+</html>

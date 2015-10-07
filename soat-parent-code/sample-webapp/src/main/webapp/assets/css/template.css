@@ -1,0 +1,52 @@
+body {
+    padding-top: 50px;
+}
+
+.content {
+    padding-bottom: 15px;
+}
+
+h1 {
+    padding: 0.5em 0;
+}
+
+nav.action-bar {
+    margin: 1em 0 0.5em 0;
+    text-align: right;
+}
+
+nav.action-bar a, nav.action-bar button {
+    border-radius: 20px;
+}
+
+h2.home-title em {
+    font-size: 0.7em;
+    font-style: italic;
+}
+
+div.author {
+    font-style: italic;
+    padding: 0 0 0.7em 0;
+}
+
+div.post-item {
+    margin: 5px 0 20px 0;
+    padding: 0.5em 1em;
+    border: 1px solid rgb(200, 200, 200);
+    border-bottom-left-radius: 5px;
+    border-top: 0;
+    border-right: 0;
+}
+
+div.post-item h2 {
+    margin-top: 5px;
+}
+
+div.post-item a.btn {
+    border-radius: 15px;
+    padding: 0.2em 0.4em;
+}
+
+div.comments {
+    margin-top: 10px;
+}

@@ -1,6 +1,7 @@
 package fr.patouche.soat.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import fr.patouche.soat.entity.Post;
 
@@ -13,8 +14,8 @@ public interface PostService {
 
     List<Post> getAll();
 
-    Post create(String post, String author);
+    Post create(String author, String title, String post);
 
-    Post read(Long id);
+    Optional<Post> read(Long id);
 
 }

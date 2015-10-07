@@ -1,0 +1,47 @@
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<head>
+    <title>All Posts</title>
+</head>
+<body>
+<div layout:fragment="content">
+
+    <nav class="action-bar">
+        <a th:href="@{/}" th:utext="#{post.read.back}" class="btn btn-default">Back</a>
+    </nav>
+
+    <!--@thymesVar id="post" type="fr.patouche.soat.entity.Post"-->
+    <h1 th:text="${post.title}">Post title</h1>
+
+    <div class="author" th:text="#{post.read.author(${post.author})}">By author</div>
+
+    <div><p th:text="${post.content}">Post content</p></div>
+
+
+    <div class="comments">
+
+        <h2 th:text="#{post.read.comment.title}"></h2>
+
+        <div th:each="c : ${comments}">
+            <div th:text="${c.content}">Comment content</div>
+            <div class="text-right" th:text="#{post.read.author(${c.author})}">Author Name</div>
+        </div>
+
+        <form th:action="@{/post/{postId}/comment(postId=${post.id})}" method="post">
+            <div class="form-group">
+                <label for="author">Author</label>
+                <input type="text" id="author" name="author" class="form-control"/>
+            </div>
+
+            <div class="form-group">
+                <label for="content">Content</label>
+                <textarea id="content" name="content" class="form-control" rows="5"></textarea>
+            </div>
+            <div class="text-right">
+                <button type="submit" class="btn btn-primary" th:text="#{post.read.comment.submit}">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+</body>
+</html>

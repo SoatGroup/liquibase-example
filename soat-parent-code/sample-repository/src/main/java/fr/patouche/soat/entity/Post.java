@@ -1,19 +1,3 @@
-/*
- * Copyright 2012-2013 the original author or authors.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *      http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package fr.patouche.soat.entity;
 
 import javax.persistence.Column;
@@ -44,19 +28,25 @@ public class Post implements Serializable {
     private Long id;
 
     /** The post author. */
-    @Column(name = "AUTHOR")
+    @Column(name = "AUTHOR", nullable = false)
     private String author;
 
     /** The post content. */
     @NaturalId
-    @Column(nullable = false)
+    @Column(name = "TITLE", nullable = false)
+    private String title;
+
+    /** The post content. */
+    @NaturalId
+    @Column(name = "CONTENT", nullable = false, length = 4000)
     private String content;
 
     protected Post() {
     }
 
-    public Post(String author, String content) {
+    public Post(String author, String title, String content) {
         this.author = author;
+        this.title = title;
         this.content = content;
     }
 
@@ -76,6 +66,14 @@ public class Post implements Serializable {
         this.author = author;
     }
 
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(final String title) {
+        this.title = title;
+    }
+
     public String getContent() {
         return content;
     }
@@ -86,6 +84,6 @@ public class Post implements Serializable {
 
     @Override
     public String toString() {
-        return "Post[author='" + this.getAuthor() + "', content='" + this.getContent() + "']";
+        return "Post[author='" + this.getAuthor() + "', title='" + this.getTitle() + "',content='" + this.getContent() + "']";
     }
 }
