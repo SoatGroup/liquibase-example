@@ -14,6 +14,14 @@
     <name>Soat : Sample Repository</name>
 
     <dependencies>
+
+        <!-- Database Shema -->
+        <dependency>
+            <groupId>fr.patouche.soat</groupId>
+            <artifactId>sample-liquibase</artifactId>
+        </dependency>
+
+
         <!-- Hibernate -->
         <dependency>
             <groupId>org.hibernate</groupId>

@@ -31,7 +31,7 @@ public class ApplicationConfiguration {
 
     private Map<String, ?> additionalProperties(final Environment env) {
         final Map<String, Object> properties = new HashMap<>();
-        properties.put(AvailableSettings.HBM2DDL_AUTO, "create-drop");
+//        properties.put(AvailableSettings.HBM2DDL_AUTO, "create-drop");
         properties.put(AvailableSettings.DIALECT, "org.hibernate.dialect.PostgreSQL9Dialect");
         return properties;
     }

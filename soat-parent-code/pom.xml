@@ -36,12 +36,14 @@
 
         <querydsl.version>3.6.6</querydsl.version>
         <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+        <liquibase.version>3.4.1</liquibase.version>
     </properties>
 
     <modules>
         <module>sample-webapp</module>
         <module>sample-service</module>
         <module>sample-repository</module>
+        <module>sample-liquibase</module>
     </modules>
 
     <dependencies>
@@ -95,6 +97,11 @@
             <dependency>
                 <groupId>fr.patouche.soat</groupId>
                 <artifactId>sample-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>fr.patouche.soat</groupId>
+                <artifactId>sample-liquibase</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -159,10 +166,22 @@
                 <artifactId>querydsl-jpa</artifactId>
                 <version>${querydsl.version}</version>
             </dependency>
+
+            <!-- Database driver -->
             <dependency>
                 <groupId>com.h2database</groupId>
                 <artifactId>h2</artifactId>
                 <version>1.4.189</version>
+            </dependency>
+            <dependency>
+                <groupId>postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>9.1-901-1.jdbc4</version>
+            </dependency>
+            <dependency>
+                <groupId>org.liquibase</groupId>
+                <artifactId>liquibase-core</artifactId>
+                <version>${liquibase.version}</version>
             </dependency>
 
             <!-- Thymeleaf -->
@@ -313,6 +332,7 @@
 
 
             </plugin>
+
             <plugin>
                 <groupId>com.mysema.maven</groupId>
                 <artifactId>apt-maven-plugin</artifactId>
@@ -325,13 +345,21 @@
                     </dependency>
                 </dependencies>
             </plugin>
-
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>2.5</version>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <version>${liquibase.version}</version>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
 
     <reporting>

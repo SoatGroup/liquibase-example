@@ -28,3 +28,6 @@ buildNumber.properties
 .pmd
 .checkstyle
 .pmdruleset
+
+# Liquibase integration
+*.secret.properties
