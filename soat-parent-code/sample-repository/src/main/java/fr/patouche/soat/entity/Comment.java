@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "comment")
-public class Comment extends AbstractEntity implements Serializable {
+public class Comment implements Serializable {
 
     /** Serial version UID. */
     private static final long serialVersionUID = 1L;
@@ -35,7 +35,7 @@ public class Comment extends AbstractEntity implements Serializable {
     private String content;
 
     /** The author name. */
-    @Column(name = "user_id", nullable = false)
+    @Column(name = "author", nullable = false)
     private String author;
 
     /** The post which the comment is related. */
@@ -86,6 +86,6 @@ public class Comment extends AbstractEntity implements Serializable {
 
     @Override
     public String toString() {
-        return "Post[author='" + this.getAuthor() + "', content='" + this.getContent() + "', post='" + this.getPost() + "']";
+        return "Comment[author='" + this.getAuthor() + "', content='" + this.getContent() + "', post='" + this.getPost() + "']";
     }
 }

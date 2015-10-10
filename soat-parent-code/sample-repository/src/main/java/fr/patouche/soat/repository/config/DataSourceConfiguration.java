@@ -1,4 +1,4 @@
-package fr.patouche.soat.web.config;
+package fr.patouche.soat.repository.config;
 
 import javax.sql.DataSource;
 
