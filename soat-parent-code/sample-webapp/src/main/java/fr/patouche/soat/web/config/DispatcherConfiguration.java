@@ -30,7 +30,10 @@ import nz.net.ultraq.thymeleaf.LayoutDialect;
  */
 @EnableWebMvc
 @Configuration
-@ComponentScan({ "fr.patouche.soat.web" })
+@ComponentScan(
+        value = { "fr.patouche.soat.web" },
+        excludeFilters = { @ComponentScan.Filter(classes = Configuration.class) }
+)
 public class DispatcherConfiguration extends WebMvcConfigurerAdapter {
 
     /** Character encoding. */

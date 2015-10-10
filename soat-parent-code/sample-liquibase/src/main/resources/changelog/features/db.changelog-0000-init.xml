@@ -4,13 +4,16 @@
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.4.xsd">
 
     <changeSet author="patouche" id="1444232542055-1">
+        <comment>Create sequence for comment id.</comment>
         <createSequence sequenceName="comment_id_seq"/>
     </changeSet>
     <changeSet author="patouche" id="1444232542055-2">
+        <comment>Create sequence for post id.</comment>
         <createSequence sequenceName="post_id_seq"/>
     </changeSet>
 
     <changeSet author="patouche" id="1444232542055-3">
+        <comment>Create table comment.</comment>
         <createTable tableName="comment">
             <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -28,6 +31,7 @@
     </changeSet>
 
     <changeSet author="patouche" id="1444232542055-4">
+        <comment>Create table post.</comment>
         <createTable tableName="post">
             <column name="id" type="BIGINT">
                 <constraints nullable="false"/>
@@ -45,17 +49,21 @@
     </changeSet>
 
     <changeSet author="patouche" id="1444232542055-5">
+        <comment>Add primary key constraint on table comment.</comment>
         <addPrimaryKey columnNames="id" constraintName="comment_pkey" tableName="comment"/>
     </changeSet>
     <changeSet author="patouche" id="1444232542055-6">
+        <comment>Add primary key constraint on table post.</comment>
         <addPrimaryKey columnNames="id" constraintName="post_pkey" tableName="post"/>
     </changeSet>
     <changeSet author="patouche" id="1444232542055-7">
+        <comment>Add unique constraint on columns (content, title) on table post.</comment>
         <addUniqueConstraint columnNames="content, title" constraintName="uk_bkkjcjrrl1t9e2j0ptwdl8etm"
                              tableName="post"/>
     </changeSet>
 
     <changeSet author="patouche" id="1444232542055-8">
+        <comment>Add foreign key constraint on table comment for column post_id.</comment>
         <addForeignKeyConstraint baseColumnNames="post_id" baseTableName="comment"
                                  constraintName="fk_f1sl0xkd2lucs7bve3ktt3tu5" deferrable="false"
                                  initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"

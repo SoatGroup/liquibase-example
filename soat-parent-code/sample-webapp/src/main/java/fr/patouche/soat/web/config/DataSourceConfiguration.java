@@ -11,6 +11,8 @@ import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.jdbc.datasource.lookup.JndiDataSourceLookup;
 
+import fr.patouche.soat.LiquibaseHelper;
+
 /**
  * Datasource configuration.
  *
@@ -34,9 +36,9 @@ public class DataSourceConfiguration {
         @Bean
         public DataSource dataSource() {
             LOGGER.info("Create a H2 DataSource");
-            return new EmbeddedDatabaseBuilder()
-                    .setType(EmbeddedDatabaseType.H2)
-                    .build();
+            return new LiquibaseHelper(new EmbeddedDatabaseBuilder().setType(EmbeddedDatabaseType.H2).build())
+                    .update()
+                    .getDataSource();
         }
     }
 
@@ -51,7 +53,9 @@ public class DataSourceConfiguration {
          */
         @Bean
         public DataSource dataSource() {
-            return new JndiDataSourceLookup().getDataSource("jdbc/dev");
+            return new LiquibaseHelper(new JndiDataSourceLookup().getDataSource("jdbc/dev"))
+                    .checkAndFail()
+                    .getDataSource();
         }
     }
 

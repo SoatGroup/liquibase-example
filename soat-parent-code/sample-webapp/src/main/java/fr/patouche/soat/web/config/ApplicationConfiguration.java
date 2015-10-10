@@ -11,6 +11,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.env.Environment;
+import org.springframework.data.convert.Jsr310Converters;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -26,7 +27,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Configuration
 @Import(DataSourceConfiguration.class)
 @EnableJpaRepositories(basePackages = "fr.patouche.soat.repository")
-@ComponentScan("fr.patouche.soat.service")
+@ComponentScan(
+        value = "fr.patouche.soat.service",
+        excludeFilters = { @ComponentScan.Filter(classes = Configuration.class) }
+)
 public class ApplicationConfiguration {
 
     private Map<String, ?> additionalProperties(final Environment env) {
