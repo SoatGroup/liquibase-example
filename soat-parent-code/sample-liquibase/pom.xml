@@ -24,10 +24,6 @@
         </dependency>
 
         <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-        </dependency>
-        <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <scope>test</scope>
@@ -39,20 +35,37 @@
         </dependency>
     </dependencies>
 
+    <build>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.liquibase</groupId>
+                    <artifactId>liquibase-maven-plugin</artifactId>
+                    <configuration>
+                        <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
+                        <changeLogFile>${project.build.directory}/classes/changelog/db.changelog-master.xml</changeLogFile>
+                        <propertyFile>${project.build.directory}/classes/user/db-${user.name}.properties</propertyFile>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
     <profiles>
         <profile>
-            <id>db-migration</id>
+            <id>migration-developer</id>
+            <activation>
+                <file>
+                    <exists>${user.home}/db-${user.name}.properties</exists>
+                </file>
+            </activation>
             <build>
                 <plugins>
                     <plugin>
                         <groupId>org.liquibase</groupId>
                         <artifactId>liquibase-maven-plugin</artifactId>
                         <configuration>
-                            <promptOnNonLocalDatabase>true</promptOnNonLocalDatabase>
-                            <changeLogFile>${project.build.directory}/classes/changelog/db.changelog-master.xml
-                            </changeLogFile>
-                            <propertyFile>${project.build.directory}/classes/user/db-${user.name}.secret.properties
-                            </propertyFile>
+                            <propertyFile>${user.home}/db-${user.name}.properties</propertyFile>
                         </configuration>
                     </plugin>
                 </plugins>

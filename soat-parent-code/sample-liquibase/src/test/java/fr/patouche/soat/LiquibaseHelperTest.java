@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
@@ -23,12 +22,8 @@ public class LiquibaseHelperTest {
     public void setUp() {
         this.dataSource = new EmbeddedDatabaseBuilder()
                 .setType(EmbeddedDatabaseType.H2)
+                .addScript("classpath:/h2-reset.sql")
                 .build();
-    }
-
-    @After
-    public void tearDown() {
-        this.dataSource.shutdown();
     }
 
     public Set<String> getTables() throws SQLException {
@@ -55,7 +50,7 @@ public class LiquibaseHelperTest {
         // ASSERT
         assertThat(changeSets).as("list unrun changeSets")
                 .isNotNull()
-                .contains("Changelog : '1444232542055-7' by patouche in file 'db.changelog-0000-init.xml'");
+                .contains("Changelog : '1444232542055-8' by patouche in file 'db.changelog-1.0.xml'");
     }
 
     @Test

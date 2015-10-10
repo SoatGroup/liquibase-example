@@ -18,7 +18,7 @@ import java.io.Serializable;
  */
 @Entity
 @Table(name = "comment")
-public class Comment implements Serializable {
+public class Comment extends AbstractEntity implements Serializable {
 
     /** Serial version UID. */
     private static final long serialVersionUID = 1L;
