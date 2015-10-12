@@ -16,11 +16,11 @@ function usage()
 {
 	echo -e "$PROGNAME\n";
 	echo -e "NOM\n\t"$PROGNAME" - Operation for liquibase\n";
-	echo -e "SYNOPSIS\n\t"$PROGNAME" [OPTIONS] GOAL\n\t"$PROGNAME" [-h|--help] : print this help\n";
+	echo -e "SYNOPSIS\n\t"$PROGNAME" [OPTIONS] GOAL\n\t"$PROGNAME" [-h|--help] [-Ddetail=true]: print this help\n";
 	echo -e "GOALS";
 	output=$(mvn $LIQUIBASE_OPTS liquibase:help | egrep -v '\[INFO\]' | awk '/^liquibase:/,/\\n/');
 	for g in $(echo "$output" | egrep -io '^liquibase\:[a-z]+$' | sed -r 's/^liquibase:([a-z]+)$/\1/gi'); do
-		cmd_detail=$(echo "$output" | awk '/^liquibase:'$g'$/ {flag=1;next} /^\s*$/{flag=0} flag {print}');
+		cmd_detail=$(echo "$output" | awk '/^liquibase:'$g'$/ {flag=1;next} /^\s*liquibase:.+$/{flag=0} flag {print}');
 		echo -e "- $g : \n$cmd_detail\n" | sed -r 's/^([^\s].+)$/\t\1/g';
 	done
 	echo -e "OPTIONS";
@@ -50,8 +50,7 @@ if [[ $1 == "" ]] ; then u=$(usage); echo "$u">&2 ; exit 1 ; fi
 # Execute maven goal for liquibase plugin with only the required log parsing
 echo -e "Execute command '$1' on database :\n";
 start_date=$(date +%s);
-mvn $LIQUIBASE_OPTS resources:resources liquibase:$1;
-# | awk '/liquibase-maven-plugin/ {flag=1;next} /BUILD\s+SUCCESS/{flag=0} flag {print}';
+mvn $LIQUIBASE_OPTS resources:resources liquibase:$1| awk '/liquibase-maven-plugin/ {flag=1;next} /BUILD\s+SUCCESS/{flag=0} flag {print}';
 echo -e "\nCommand end with status $? into "$(( $(date +%s) - $start_date ))" seconds"; 
 
 exit $?;
